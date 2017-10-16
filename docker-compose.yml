@@ -1,23 +1,45 @@
 version: '3'
 services:
-  applications:
-    image: tianon/true
-    volumes:
-     - /data/Work:/var/www
   nginx:
-    image: nginx:latest
+    build: ./services/nginx
     ports:
      - "80:80"
     volumes:
-     - /data/Work:/var/www
+        - /data/Work:/var/www
+        - /tmp:/var/log/nginx
+        - ./services/nginx/sites:/etc/nginx/sites-available
+    ports:
+        - "80:80"
+        - "443:443"
+    depends_on:
+        - php-fpm
     tty: true
+
   php-fpm:
     build: ./services/php
+    volumes:
+     - /data/Work:/var/www
+    depends_on:
+        - mysql
+        - memcached
+        - redis
+
   memcached:
     image: memcached:latest
     ports:
      - "11211:11211"
+
   redis:
     image: redis:latest
     ports: 
      - "6379:6379"
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      TZ: 'Asia/Shanghai'
+      MYSQL_USER: homestead
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - 33060:3306
