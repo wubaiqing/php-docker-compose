@@ -1,5 +1,16 @@
 version: '3'
 services:
+  applications:
+    image: tianon/true
+    volumes:
+     - /data/Work:/var/www
+  nginx:
+    image: nginx:latest
+    ports:
+     - "80:80"
+    volumes:
+     - /data/Work:/var/www
+    tty: true
   php-fpm:
     build: ./services/php
   memcached:
