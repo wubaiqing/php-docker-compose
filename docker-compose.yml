@@ -24,6 +24,11 @@ services:
         - memcached
         - redis
 
+  php-composer:
+    build: ./services/tools/composer 
+    volumes:
+     - /data/Work/article:/app
+
   memcached:
     image: memcached:latest
     ports:
