@@ -40,7 +40,7 @@ services:
      - "6379:6379"
 
   mysql:
-    image: mysql:latest
+    build: ./services/mysql/
     restart: always
     environment:
       TZ: 'Asia/Shanghai'
@@ -48,3 +48,4 @@ services:
       MYSQL_ROOT_PASSWORD: secret
     ports:
       - 33060:3306
+
