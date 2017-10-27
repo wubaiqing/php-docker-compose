@@ -24,6 +24,11 @@ services:
         - memcached
         - redis
 
+  node:
+    build: ./services/node/
+    volumes:
+     - /data/Work/yzbizcenter-web:/app
+
   php-composer:
     build: ./services/tools/composer 
     volumes:
