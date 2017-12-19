@@ -2,15 +2,12 @@ version: '3'
 services:
   nginx:
     build: ./services/nginx
-    ports:
-     - "80:80"
     volumes:
         - /data/Work:/var/www
         - /tmp:/var/log/nginx
         - ./services/nginx/sites:/etc/nginx/sites-available
     ports:
         - "80:80"
-        - "443:443"
     depends_on:
         - php-fpm
     tty: true
@@ -23,16 +20,6 @@ services:
         - mysql
         - memcached
         - redis
-
-  node:
-    build: ./services/node/
-    volumes:
-     - /data/Work/yzbizcenter-web:/app
-
-  php-composer:
-    build: ./services/tools/composer 
-    volumes:
-     - /data/Work/article:/app
 
   memcached:
     image: memcached:latest
