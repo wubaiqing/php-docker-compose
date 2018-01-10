@@ -38,6 +38,8 @@ services:
       TZ: 'Asia/Shanghai'
       MYSQL_USER: homestead
       MYSQL_ROOT_PASSWORD: secret
+    volumes:
+        - ./mysql/store:/var/lib/mysql
     ports:
       - 33060:3306
 
