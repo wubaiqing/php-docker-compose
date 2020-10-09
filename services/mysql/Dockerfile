@@ -1,4 +1,2 @@
-FROM mysql:latest
-MAINTAINER wubaiqing <wubaiqing@vip.qq.com>
-
-ADD mysql.cnf /etc/mysql/conf.d
+FROM mysql:5.6
+LABEL wubaiqing <wubaiqing@vip.qq.com>

@@ -1,13 +1,13 @@
-version: '3'
+version: '3.1'
 services:
   nginx:
     build: ./services/nginx
     volumes:
-        - /data/Work:/var/www
+        - /Users/yiche1/count/github.com/wubaiqing:/var/www:ro
         - /tmp:/var/log/nginx
         - ./services/nginx/sites:/etc/nginx/sites-available
     ports:
-        - "80:80"
+        - "8090:80"
     depends_on:
         - php-fpm
     tty: true
@@ -15,31 +15,29 @@ services:
   php-fpm:
     build: ./services/php
     volumes:
-     - /data/Work:/var/www
+     - /Users/yiche1/count/github.com/wubaiqing:/var/www
     depends_on:
         - mysql
-        - memcached
         - redis
 
   memcached:
     image: memcached:latest
     ports:
-     - "11211:11211"
+      - "11211:11211"
 
   redis:
     image: redis:latest
     ports: 
-     - "6379:6379"
+     - "63790:6379"
 
   mysql:
-    build: ./services/mysql/
+    image: mysql:5.6
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      TZ: 'Asia/Shanghai'
-      MYSQL_USER: homestead
-      MYSQL_ROOT_PASSWORD: secret
-    volumes:
-        - ./mysql/store:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: example
+    volumes: 
+      - ./services/mysql/store:/var/lib/mysql
     ports:
-      - 33060:3306
+      - "33060:3306"
 

@@ -2,7 +2,7 @@ FROM php:7.1.10-fpm
 MAINTAINER wubaiqing <wubaiqing@vip.qq.com>
 
 # 阿里源
-ADD sources.list /etc/apt/sources.list
+# ADD sources.list /etc/apt/sources.list
 
 # 安装依赖
 RUN apt-get update && apt-get install -y \

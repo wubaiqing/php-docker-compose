@@ -1,3 +1,0 @@
-log-bin=mysql-bin
-binlog-format=ROW
-server_id=1
